@@ -19,10 +19,13 @@ class Intopage2 extends StatelessWidget {
           gradient: LinearGradient(
               colors: theme.brightness == Brightness.dark
                   ? [
-                      AppColor.onbordingdark,
-                      AppColor.onbordingdark1
+                      Color.fromARGB(255, 212, 123, 51),
+                      Color.fromARGB(255, 93, 11, 194)
                     ] // Koyu tema için
-                  : [AppColor.onbordinglight, AppColor.onbordinglight1])),
+                  : [
+                      const Color.fromARGB(232, 248, 107, 64),
+                      AppColor.onbordinglight1
+                    ])),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -39,7 +42,7 @@ class Intopage2 extends StatelessWidget {
                   clipBehavior: Clip.hardEdge,
                   child: Center(
                     child: Text(
-                        AppText.onbordinmgO,
+                      AppText.onbordinmgO,
                       textAlign: TextAlign.center,
                     ),
                   ),

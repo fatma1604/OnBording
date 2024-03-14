@@ -13,9 +13,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Center(
         child: Text(
-          "home",
+          "Bu ekranı Fatma Nur Kamış tasarlamıştır",
           style: TextStyle(
-            color: Colors.blue,
+            color: const Color.fromARGB(255, 75, 107, 133),
             fontWeight: FontWeight.w900,
             fontSize: 18,
             shadows: [

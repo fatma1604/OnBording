@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:onbording2/onboard/onbord_model.dart';
+import 'package:lottie/lottie.dart';
+import 'package:onbording2/onbord/onbord_model.dart';
+
+
 
 class OnboardPage extends StatelessWidget {
   final PageData page;
@@ -14,7 +17,7 @@ class OnboardPage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16.0),
           margin: const EdgeInsets.all(16.0),
-          child: Image.network(page.url),
+          child: Lottie.network(page.url),
         ),
       ],
     );

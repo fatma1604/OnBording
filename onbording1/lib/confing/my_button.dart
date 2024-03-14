@@ -22,8 +22,6 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: primaryColor,
-        onPrimary: onPrimaryColor,
         elevation: elevation,
         padding: padding,
       ),

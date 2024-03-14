@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:onbording2/themes/color.dart';
+import 'package:onbording2/onbord/color.dart';
+
 
 class AppTheme {
   AppTheme._();
@@ -11,7 +12,7 @@ class AppTheme {
     brightness: Brightness.light,
     useMaterial3: true,
     colorScheme: const ColorScheme.light(
-      background: Colors.transparent,
+      background: AppColor.lightBg,
       /* primary: Color.fromARGB(255, 0, 0, 0),
       onBackground: Colors.blue,
       onPrimary: Colors.white, */
@@ -24,7 +25,10 @@ class AppTheme {
     brightness: Brightness.dark,
     useMaterial3: true,
     colorScheme: const ColorScheme.dark(
-      background: Color.fromARGB(255, 7, 69, 119),
+      background: Color.fromARGB(255, 2, 7, 22),
+      /* primary: Color.fromARGB(255, 255, 255, 255),
+      onBackground: Colors.deepPurple,
+      onPrimary: Colors.black, */
     ),
   );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyButton extends StatelessWidget {
-  const MyButton({
+class OnButton extends StatelessWidget {
+  const OnButton({
     Key? key,
     required this.onPressed,
     required this.primaryColor,
@@ -22,8 +22,7 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: primaryColor,
-        onPrimary: onPrimaryColor,
+       
         elevation: elevation,
         padding: padding,
       ),

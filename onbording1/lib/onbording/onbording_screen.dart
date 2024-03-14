@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:onbording1/confing/my_button.dart';
 import 'package:onbording1/home/home.dart';
@@ -7,7 +6,6 @@ import 'package:onbording1/onbording/intopage1.dart';
 import 'package:onbording1/onbording/intopage2.dart';
 import 'package:onbording1/onbording/intpage3.dart';
 import 'package:onbording1/themes/color.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnbordingScreen extends StatefulWidget {
   const OnbordingScreen({Key? key}) : super(key: key);
@@ -17,9 +15,8 @@ class OnbordingScreen extends StatefulWidget {
 }
 
 class _OnbordingScreenState extends State<OnbordingScreen> {
-  PageController _controller = PageController();
   int _currentPage = 0;
-  List<bool> _buttonsVisibe = [false, false, false];
+  List<bool> _buttonsVisible = [false, false, false];
 
   final List<Widget> pages = [
     Intopage1(),
@@ -27,96 +24,74 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
     Intopage3(),
   ];
 
-  ThemeData getTheme() {
-    return Theme.of(context);
-  }
-
   @override
   void initState() {
-    for (int i = 0; i < _buttonsVisibe.length; i++) {
-      Timer(Duration(milliseconds: 5000 * (i + 1)), () {
+    super.initState();
+    // Her sayfanın initState'i çağrıldığında 5 saniyelik bekleme süresi başlatılıyor
+    for (int i = 0; i < _buttonsVisible.length; i++) {
+      Timer(Duration(seconds: 5 * (i + 1)), () {
         setState(() {
-          _buttonsVisibe[i] = true;
+          _buttonsVisible[i] = true;
         });
       });
     }
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = getTheme();
-
     return Scaffold(
       body: Stack(
         children: [
-          PageView(
-            controller: _controller,
-            onPageChanged: (int page) {
-              setState(() {
-                _currentPage = page;
-              });
-            },
-            children: pages,
-          ),
+          // Sayfaları göstermek için PageView kullanmıyoruz
+          // Sadece _currentPage'e göre ilgili sayfayı görüntülüyoruz
+          pages[_currentPage],
           Positioned(
             bottom: 50,
             left: 0,
             right: 0,
             child: AnimatedOpacity(
-              opacity: _buttonsVisibe[_currentPage] ? 1.0 : 0.0,
+              opacity: _buttonsVisible[_currentPage] ? 1.0 : 0.0,
               duration: Duration(milliseconds: 500),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SmoothPageIndicator(
-                      controller: _controller,
-                      count: pages.length,
-                      effect: WormEffect(), // You can choose different effects
+                    MyButton(
+                      onPressed: () {
+                        if (_currentPage > 0) {
+                          setState(() {
+                            _currentPage--;
+                          });
+                        }
+                      },
+                      primaryColor: AppColor.lightBg,
+                      onPrimaryColor: Theme.of(context).cardColor,
+                      elevation: 5,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                      text: 'Back',
                     ),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MyButton(
-                          onPressed: () {
-                            _controller.jumpToPage(pages.length - 1);
-                          },
-                          primaryColor: AppColor.lightBg,
-                          onPrimaryColor: theme.cardColor,
-                          elevation: 5,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
-                          text: 'Skip',
-                        ),
-                        MyButton(
-                          onPressed: () {
-                            if (_currentPage == pages.length - 1) {
-                              // If it's the last page, navigate to the next screen
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home()),
-                              );
-                            } else {
-                              // If it's not the last page, move to the next page
-                              _controller.nextPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                          primaryColor: AppColor.lightBg,
-                          onPrimaryColor: theme.cardColor,
-                          elevation: 5,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
-                          text: _currentPage == pages.length - 1
-                              ? "Done"
-                              : "Next",
-                        )
-                      ],
+                    MyButton(
+                      onPressed: () {
+                        if (_currentPage < pages.length - 1) {
+                          setState(() {
+                            _currentPage++;
+                          });
+                        } else {
+                          // Eğer son sayfadaysa, ana ekrana git
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Home()),
+                          );
+                        }
+                      },
+                      primaryColor: AppColor.lightBg,
+                      onPrimaryColor: Theme.of(context).cardColor,
+                      elevation: 5,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                      text: _currentPage == pages.length - 1 ? "Done" : "Next",
                     ),
                   ],
                 ),

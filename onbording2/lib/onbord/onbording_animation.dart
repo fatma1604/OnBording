@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:onbording2/config/mybuton.dart';
 import 'package:onbording2/home/home.dart';
-import 'package:onbording2/onboard/intopage.dart';
-import 'package:onbording2/onboard/onboard_data.dart';
-import 'package:onbording2/themes/color.dart';
+import 'package:onbording2/onbord/intopage.dart';
+import 'package:onbording2/onbord/onboard_data.dart';
+import 'package:onbording2/onbord/onbordbutton.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+final darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  // Diğer özel renkler, yazı stilleri vb.
+);
+
+// Gündüz teması renkleri
+final lightTheme = ThemeData(
+  brightness: Brightness.light,
+  // Diğer özel renkler, yazı stilleri vb.
+);
 class OnboardingAnimation extends StatefulWidget {
   @override
   _OnboardingAnimationState createState() => _OnboardingAnimationState();
@@ -46,32 +56,32 @@ class _OnboardingAnimationState extends State<OnboardingAnimation> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MyButton(
+                    OnButton(
                       onPressed: () {
                         _controller.jumpToPage(pages.length - 1);
                       },
-                      primaryColor: AppColor.buttontext,
-                      onPrimaryColor: AppColor.button,
+                      primaryColor: Colors.white54,
+                      onPrimaryColor: Colors.red,
                       elevation: 5,
                       padding:
                           EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                       text: 'Skip',
                     ),
                     onLastpage
-                        ? MyButton(
+                        ? OnButton(
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return Home();
                               }));
                             },
-                            primaryColor: AppColor.buttontext,
+                            primaryColor: Colors.white54,
                             onPrimaryColor: Colors.red,
                             elevation: 5,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 20),
                             text: "Done")
-                        : MyButton(
+                        : OnButton(
                             onPressed: () {
                               _controller.nextPage(
                                   duration: Duration(milliseconds: 500),
