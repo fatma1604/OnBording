@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:onbording1/themes/color.dart';
 import 'package:onbording1/themes/images.dart';
 import 'package:onbording1/themes/text.dart';
@@ -19,10 +18,13 @@ class Intopage1 extends StatelessWidget {
           gradient: LinearGradient(
               colors: theme.brightness == Brightness.dark
                   ? [
-                      AppColor.onbordingdark,
-                      AppColor.onbordingdark1
+                      Color.fromARGB(255, 212, 123, 51),
+                      Color.fromARGB(255, 93, 11, 194)
                     ] // Koyu tema için
-                  : [AppColor.onbordinglight, AppColor.onbordinglight1])),
+                  : [
+                      const Color.fromARGB(232, 248, 107, 64),
+                      AppColor.onbordinglight1
+                    ])),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
